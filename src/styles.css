@@ -1,0 +1,139 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-nude: var(--nude);
+  --color-nude-deep: var(--nude-deep);
+  --color-ink: var(--ink);
+
+  --shadow-luxe: 0 30px 80px -30px color-mix(in oklab, var(--gold) 35%, transparent);
+  --shadow-soft: 0 20px 60px -25px color-mix(in oklab, var(--nude-deep) 50%, transparent);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.995 0.003 80);
+  --foreground: oklch(0.18 0.01 60);
+  --ink: oklch(0.14 0.008 60);
+
+  --nude: oklch(0.95 0.018 60);
+  --nude-deep: oklch(0.88 0.03 55);
+  --gold: oklch(0.74 0.12 75);
+  --gold-soft: oklch(0.86 0.07 80);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+
+  --primary: var(--ink);
+  --primary-foreground: oklch(0.985 0.003 80);
+  --secondary: var(--nude);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.96 0.008 70);
+  --muted-foreground: oklch(0.45 0.012 60);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.6 0.21 25);
+  --destructive-foreground: oklch(0.985 0.003 80);
+  --border: oklch(0.9 0.012 65);
+  --input: oklch(0.92 0.012 65);
+  --ring: var(--gold);
+}
+
+.dark {
+  --background: oklch(0.14 0.008 60);
+  --foreground: oklch(0.97 0.005 80);
+  --card: oklch(0.18 0.01 60);
+  --card-foreground: oklch(0.97 0.005 80);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@utility text-gradient-gold {
+  background: linear-gradient(135deg, oklch(0.62 0.13 70), oklch(0.82 0.11 85), oklch(0.62 0.13 70));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-nude {
+  background: linear-gradient(180deg, oklch(0.99 0.005 80) 0%, oklch(0.95 0.02 60) 100%);
+}
+
+@utility glass {
+  background: color-mix(in oklab, white 65%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 70%, transparent);
+}
+
+@utility glass-dark {
+  background: color-mix(in oklab, oklch(0.18 0.01 60) 55%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 15%, transparent);
+}
+
+@utility hairline {
+  border-top: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-12px) }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0 }
+  100% { background-position: 200% 0 }
+}
+.animate-float { animation: float-slow 6s ease-in-out infinite; }
+.shimmer-gold {
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--gold) 40%, transparent), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
